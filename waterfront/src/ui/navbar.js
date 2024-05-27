@@ -7,7 +7,7 @@ export default function NavBarDesign() {
     <nav  style={{
       background: 'linear-gradient(90deg, #5AB2FF, #0073E6)',
       padding: '10px 20px',
-      height: '50px',
+      height: '60px',
       fontFamily: 'Arial, sans-serif',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       display: 'flex',

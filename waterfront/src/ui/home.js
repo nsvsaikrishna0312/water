@@ -187,11 +187,14 @@ export default function Home() {
         <div style={containerStyle}>
           {customers
               .filter((customer) => {
-                if (search.toLowerCase() === '') {
-                  return true;
-                }
-                return customer.customername.toLowerCase().includes(search.toLowerCase());
-              })
+                    const lowerSearch = search.toLowerCase();
+                    return (
+                      lowerSearch === '' ||
+                      customer.customername.toLowerCase().includes(lowerSearch) ||
+                      customer.phonenumber.toString().includes(lowerSearch) || // Convert phone number to string before comparison
+                      customer.address.toLowerCase().includes(lowerSearch)
+                    );
+                  })
               .map((customer) => (
                   <div key={customer._id} style={cardStyle}>
                     <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}>

@@ -194,11 +194,15 @@ export default function DriverView() {
           <div style={containerStyle}>
               {drivers
                   .filter((driver) => {
-                      if (search.toLowerCase() === '') {
-                          return true;
-                      }
-                      return driver.drivername.toLowerCase().includes(search.toLowerCase());
+                    const lowerSearch = search.toLowerCase();
+                    return (
+                      lowerSearch === '' ||
+                      driver.drivername.toLowerCase().includes(lowerSearch) ||
+                      driver.phonenumber.toString().includes(lowerSearch) || // Convert phone number to string before comparison
+                      driver.address.toLowerCase().includes(lowerSearch)
+                    );
                   })
+
                   .map((driver) => (
                       <div key={driver._id} style={cardStyle}>
                           <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}>
