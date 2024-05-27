@@ -17,6 +17,7 @@ function App() {
       <Route path="/addcustomer" element={<AddCustomer/>}/>
       <Route path="/adddriver" element={<AddDriver/>}/>
       <Route path="/driver" element={<DriverView/>}/>
+
     </Routes>
   </BrowserRouter>
   );

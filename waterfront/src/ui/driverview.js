@@ -2,17 +2,33 @@ import React, {useEffect, useState} from 'react'
 import NavBarDesign from './navbar';
 import AddIcon from '@mui/icons-material/Add';
 import Bg from './photo1.jpg'
-import { Link } from 'react-router-dom';
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
+import { Link} from 'react-router-dom';
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import {InputGroup,Form} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 export default function DriverView() {
     const [drivers, setDrivers] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [currentDriver, setCurrentDriver] = useState(null);
   const [editedDriver, setEditedDriver] = useState({});
+  const [search, setSearch] = useState('');
+
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/driver')
@@ -92,8 +108,8 @@ export default function DriverView() {
 
   const cardStyle = {
     backgroundColor: '#E49BFF',
-    height: '230px',
-    width: '200px',
+    height: '250px',
+    width: '250px',
     padding: '19px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     borderRadius: '8px',
@@ -116,51 +132,91 @@ export default function DriverView() {
       <div>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           <NavBarDesign/>
-          <h1 style={{
-              textAlign: 'center',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              padding: '0px',
-              borderRadius: '30px',
-              fontSize: '3em',
-              marginTop: '10px',
-              marginLeft: '200px',
-              marginRight: '200px'
 
-          }}>Driver</h1>
-          <div style={{display: "flex", justifyContent: "flex-end"}}>
-              <Link to="/adddriver" style={{textDecoration: 'none'}}>
-                  <AddIcon style={{
-                      color: '#ffffff',
-                      backgroundColor: '#799351',
-                      borderRadius: '10px',
-                      fontSize: '40px',
-                      alignContent: 'right',
-                      width: '100px',
-                      marginRight: '40px',
-                      height: '50px'
-                  }}/></Link>
+          <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{padding: '10px 200px', backgroundColor: '#f8f9fa'}}
+          >
+              <Box flexGrow={1} display="flex" justifyContent="center">
+                  <Typography
+                      variant="h1"
+                      sx={{
+                          textAlign: 'center',
+                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                          padding: '0px 20px',
+                          borderRadius: '30px',
+                          fontSize: '3em',
+                          width: '500px',
+                      }}
+                  >
+                      Driver
+                  </Typography>
+              </Box>
+              <Box> {/* Added margin-left to move the icon to the right */}
+                  <div style={{justifyContent: 'flex-end', marginLeft: '100%'}}>
+                      <Link to="/adddriver" style={{textDecoration: 'none'}}>
+                          <AddIcon
+                              sx={{
+                                  color: '#ffffff',
+                                  backgroundColor: '#799351',
+                                  borderRadius: '10px',
+                                  fontSize: '40px',
+                                  width: '100px',
+                                  height: '50px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                              }}
+                          />
+                      </Link>
+                  </div>
+              </Box>
+          </Stack>
+
+
+          <div style={{borderRadius: '5px', width: '95%', display: 'flex', justifyContent: 'center', margin: 'auto'}}>
+              <Form style={{width: '100%'}}>
+                  <InputGroup style={{borderRadius: '5px', width: '100%'}}>
+                      <Form.Control
+                          type="text"
+                          placeholder="Search Drivers"
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                          // Centering the text and placeholder
+                      />
+                  </InputGroup>
+              </Form>
           </div>
 
-          <div style={containerStyle}>
-              {drivers.map(driver => (
-                  <div key={driver._id} style={cardStyle}>
-                      <div style={{height: '10px', display: 'flex', justifyContent: 'flex-end'}}>
-                          <DeleteIcon
-                              style={{cursor: 'pointer', marginRight: '12px'}}
-                              onClick={() => handleOpenDeleteDialog(driver)}
-                          />
-                          <EditIcon
-                              style={{cursor: 'pointer'}}
-                              onClick={() => handleOpenEditDialog(driver)}
-                          />
-                      </div>
-                      <h5 style={titleStyle}>{driver.drivername}</h5>
-                      <p style={textStyle}>Phone Number: {driver.phonenumber}</p>
-                      <p style={textStyle}>Address: {driver.address}</p>
-                      <p style={textStyle}>Vehicle Number: {driver.vehiclenumber}</p>
 
-                  </div>
-              ))}
+          <div style={containerStyle}>
+              {drivers
+                  .filter((driver) => {
+                      if (search.toLowerCase() === '') {
+                          return true;
+                      }
+                      return driver.drivername.toLowerCase().includes(search.toLowerCase());
+                  })
+                  .map((driver) => (
+                      <div key={driver._id} style={cardStyle}>
+                          <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: '10px'}}>
+                              <DeleteIcon
+                                  style={{cursor: 'pointer', marginRight: '12px'}}
+                                  onClick={() => handleOpenDeleteDialog(driver)}
+                              />
+                              <EditIcon
+                                  style={{cursor: 'pointer'}}
+                                  onClick={() => handleOpenEditDialog(driver)}
+                              />
+                          </div>
+                          <h5 style={titleStyle}>{driver.drivername}</h5>
+                          <p style={textStyle}>Phone Number: {driver.phonenumber}</p>
+                          <p style={textStyle}>Address: {driver.address}</p>
+                          <p style={textStyle}>Vehicle Number: {driver.vehiclenumber}</p>
+                      </div>
+                  ))}
           </div>
 
           {/* Delete Dialog */}
@@ -203,7 +259,7 @@ export default function DriverView() {
                       onChange={handleEditChange}
                       margin="normal"
                   />
-                   <TextField
+                  <TextField
                       fullWidth
                       label="Vehical Number"
                       name="vehicle Number"
