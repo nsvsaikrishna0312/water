@@ -134,46 +134,49 @@ export default function DriverView() {
           <NavBarDesign/>
 
           <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{padding: '10px 200px', backgroundColor: '#f8f9fa'}}
-          >
-              <Box flexGrow={1} display="flex" justifyContent="center">
-                  <Typography
-                      variant="h1"
-                      sx={{
-                          textAlign: 'center',
-                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                          padding: '0px 20px',
-                          borderRadius: '30px',
-                          fontSize: '3em',
-                          width: '500px',
-                      }}
-                  >
-                      Driver
-                  </Typography>
-              </Box>
-              <Box> {/* Added margin-left to move the icon to the right */}
-                  <div style={{justifyContent: 'flex-end', marginLeft: '100%'}}>
-                      <Link to="/adddriver" style={{textDecoration: 'none'}}>
-                          <AddIcon
-                              sx={{
-                                  color: '#ffffff',
-                                  backgroundColor: '#799351',
-                                  borderRadius: '10px',
-                                  fontSize: '40px',
-                                  width: '100px',
-                                  height: '50px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                              }}
-                          />
-                      </Link>
-                  </div>
-              </Box>
-          </Stack>
+  direction="row"
+  alignItems="center"
+  justifyContent="space-between"
+  sx={{
+    padding: { xs: '10px 20px', sm: '10px 50px', md: '10px 100px', lg: '10px 200px' },
+    backgroundColor: '#f8f9fa'
+  }}
+>
+  <Box flexGrow={1} display="flex" justifyContent="center">
+    <Typography
+      variant="h1"
+      sx={{
+        textAlign: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        padding: '0px 20px',
+        borderRadius: '30px',
+        fontSize: { xs: '1.5em', sm: '2em', md: '2.5em', lg: '3em' },
+        width: { xs: '200px', sm: '300px', md: '400px', lg: '500px' },
+      }}
+    >
+      Driver
+    </Typography>
+  </Box>
+  <Box display="flex" justifyContent="flex-end" sx={{ width: { xs: 'auto', md: 'auto' } }}>
+    <Link to="/adddriver" style={{ textDecoration: 'none' }}>
+      <AddIcon
+        sx={{
+          color: '#ffffff',
+          backgroundColor: '#799351',
+          borderRadius: '10px',
+          fontSize: '40px',
+          width: '50px',
+          height: '50px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginLeft: { xs: '20px', sm: '40px', md: '60px', lg: '80px' },
+        }}
+      />
+    </Link>
+  </Box>
+</Stack>
+
 
 
           <div style={{borderRadius: '5px', width: '95%', display: 'flex', justifyContent: 'center', margin: 'auto'}}>
