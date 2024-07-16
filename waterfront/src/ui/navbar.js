@@ -22,7 +22,18 @@ export default function NavBarDesign() {
         display: 'flex',
         alignItems: 'center'
       }}>
-        <li style={{ marginRight: '20px' }}>
+        <li style={{marginRight: '20px'}}>
+          <Link to="/admin/item" style={{
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '18px',
+            transition: 'color 0.3s',
+            fontWeight: '500'
+          }} onMouseOver={(e) => e.target.style.color = '#FFD700'}
+                onMouseOut={(e) => e.target.style.color = '#fff'}
+          >ITEM</Link>
+        </li>
+        <li style={{marginRight: '20px'}}>
           <Link to="/" style={{
             color: '#fff',
             textDecoration: 'none',
@@ -30,10 +41,10 @@ export default function NavBarDesign() {
             transition: 'color 0.3s',
             fontWeight: '500'
           }} onMouseOver={(e) => e.target.style.color = '#FFD700'}
-             onMouseOut={(e) => e.target.style.color = '#fff'}
+                onMouseOut={(e) => e.target.style.color = '#fff'}
           >CUSTOMER</Link>
         </li>
-        <li style={{ marginRight: '20px' }}>
+        <li style={{marginRight: '20px'}}>
           <Link to="/driver" style={{
             color: '#fff',
             textDecoration: 'none',
@@ -41,7 +52,7 @@ export default function NavBarDesign() {
             transition: 'color 0.3s',
             fontWeight: '500'
           }} onMouseOver={(e) => e.target.style.color = '#FFD700'}
-             onMouseOut={(e) => e.target.style.color = '#fff'}
+                onMouseOut={(e) => e.target.style.color = '#fff'}
           >DRIVER</Link>
         </li>
         <li>
@@ -53,9 +64,9 @@ export default function NavBarDesign() {
             alignItems: 'center',
             transition: 'color 0.3s'
           }} onMouseOver={(e) => e.target.style.color = '#FFD700'}
-             onMouseOut={(e) => e.target.style.color = '#fff'}
+                onMouseOut={(e) => e.target.style.color = '#fff'}
           >
-            <AccountCircleSharpIcon style={{ fontSize: '40px' }} />
+            <AccountCircleSharpIcon style={{fontSize: '40px'}}/>
           </Link>
         </li>
       </ul>
