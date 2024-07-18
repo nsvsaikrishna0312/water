@@ -8,6 +8,7 @@ import AddDriver from "./ui/adddriver";
 import DriverView from "./ui/driverview";
 import Customer_dash from "./ui/customer_dash";
 import Item from "./ui/item";
+import AddItem from "./ui/additem";
 function App() {
   
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/addcustomer" element={<AddCustomer/>}/>
       <Route path="/adddriver" element={<AddDriver/>}/>
       <Route path="/admin/item" element={<Item/>} />
+      <Route path="/admin/additem" element={<AddItem/>} />
       <Route path="/driver" element={<DriverView/>}/>
        <Route path="/customerdash" element={<Customer_dash/>} />
     </Routes>
